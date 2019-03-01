@@ -16,3 +16,6 @@ After cloning:
 ## Part 2 (Tag: Part2)
   * Add unit testing using mocha and chai
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part2 [yourFolder]
+## Part 3 (Tag: Part3)
+  * Hello World API using express
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part3 [yourFolder]
