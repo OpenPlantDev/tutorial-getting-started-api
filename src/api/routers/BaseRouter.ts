@@ -1,12 +1,15 @@
 import {  Router, Request, Response, NextFunction } from "express";
 import { IApiRouter } from "./IApiRouter";
+import { IApiController } from "../controllers/IApiController";
 
 export abstract class BaseRouter implements IApiRouter {
 
   public route: string = "";
+  public controller: IApiController;
 
-  constructor(route: string) {
+  constructor(route: string, controller: IApiController) {
     this.route = route;
+    this.controller = controller;
   }
 
   public routeHandler(): Router {
@@ -24,7 +27,7 @@ export abstract class BaseRouter implements IApiRouter {
   public getRoutes(router: Router): void {
     // handle GET for ${this.route}
     router.get("/", (req: Request, res: Response, next: NextFunction) => {
-      res.status(500).json({message: `Route GET ${this.route} in not yet handled`});
+      this.controller.Get(req, res, next);
     });
 
     // handle GET for ${this.route}/:componentId
