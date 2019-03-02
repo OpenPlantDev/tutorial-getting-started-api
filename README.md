@@ -19,3 +19,6 @@ After cloning:
 ## Part 3 (Tag: Part3)
   * Hello World API using express
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part3 [yourFolder]
+## Part 4 (Tag: Part4)
+  * Adding Routers and error handling
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part4 [yourFolder]

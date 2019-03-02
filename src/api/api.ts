@@ -1,9 +1,14 @@
 import express from "express";
+import {IApiRouter} from "./routers/IApiRouter";
 
 export class Api {
 
-  public Start(): void {
+  public Start(routers: IApiRouter[]): void {
     const api = express();
+
+    for (const router of routers) {
+      api.use(router.route, router.routeHandler());
+    }
 
     api.get("/api", (req, res) => {
       return res.send("Hello from the API");
