@@ -22,3 +22,6 @@ After cloning:
 ## Part 4 (Tag: Part4)
   * Adding Routers and error handling
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part4 [yourFolder]
+## Part 5 (Tag: Part5)
+  * Adding Controllers
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part5 [yourFolder]
