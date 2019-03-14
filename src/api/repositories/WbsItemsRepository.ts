@@ -1,6 +1,6 @@
 import {BaseRepository} from "./BaseRepository";
 
-export class ComponentsRepository extends BaseRepository {
+export class WbsItemsRepository extends BaseRepository {
 
   constructor() {
     super("wbsitems");

@@ -5,6 +5,7 @@ import { WbsItemsRouter } from "./api/routers/WbsItemsRouter";
 import { ComponentsController } from "./api/controllers/ComponentsController";
 import {WbsItemsController} from "./api/controllers/WbsItemsController";
 import { ComponentsRepository } from "./api/repositories/ComponentsRepository";
+import { WbsItemsRepository } from "./api/repositories/WbsItemsRepository";
 
 const api = new Api();
 

@@ -32,31 +32,28 @@ export abstract class BaseRouter implements IApiRouter {
 
     // handle GET for ${this.route}/:componentId
     router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
-      const id = req.params.id;
-      res.status(500).json({message: `Route GET ${this.route}/${id} in not yet handled`});
+      this.controller.GetById(req, res, next);
     });
   }
 
   public postRoutes(router: Router): void {
     // handle POST for ${this.route}
     router.post("/", (req: Request, res: Response, next: NextFunction) => {
-      res.status(500).json({message: `Route POST ${this.route} in not yet handled`});
+      this.controller.Add(req, res, next);
     });
   }
 
   public putRoutes(router: Router): void {
     // handle PUT for /api/components/:componentId
     router.put("/:id", (req: Request, res: Response, next: NextFunction) => {
-      const id = req.params.id;
-      res.status(500).json({message: `Route PUT ${this.route}/${id} in not yet handled`});
+      this.controller.Update(req, res, next);
     });
   }
 
   public deleteRoutes(router: Router): void {
     // handle DELETE for ${this.route}/:componentId
     router.delete("/:id", (req: Request, res: Response, next: NextFunction) => {
-      const id = req.params.id;
-      res.status(500).json({message: `Route DELETE ${this.route}/${id} in not yet handled`});
+      this.controller.Delete(req, res, next);
     });
   }
 
