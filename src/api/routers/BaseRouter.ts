@@ -5,11 +5,11 @@ import { IApiController } from "../controllers/IApiController";
 export abstract class BaseRouter implements IApiRouter {
 
   public route: string = "";
-  public controller: IApiController;
+  private _controller: IApiController;
 
-  constructor(route: string, controller: IApiController) {
+  constructor(route: string, controller: IApiController ) {
     this.route = route;
-    this.controller = controller;
+    this._controller = controller;
   }
 
   public routeHandler(): Router {
@@ -27,33 +27,33 @@ export abstract class BaseRouter implements IApiRouter {
   public getRoutes(router: Router): void {
     // handle GET for ${this.route}
     router.get("/", (req: Request, res: Response, next: NextFunction) => {
-      this.controller.Get(req, res, next);
+      this._controller.Get(req, res, next);
     });
 
     // handle GET for ${this.route}/:componentId
     router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
-      this.controller.GetById(req, res, next);
+      this._controller.GetById(req, res, next);
     });
   }
 
   public postRoutes(router: Router): void {
     // handle POST for ${this.route}
     router.post("/", (req: Request, res: Response, next: NextFunction) => {
-      this.controller.Add(req, res, next);
+      this._controller.Add(req, res, next);
     });
   }
 
   public putRoutes(router: Router): void {
     // handle PUT for /api/components/:componentId
     router.put("/:id", (req: Request, res: Response, next: NextFunction) => {
-      this.controller.Update(req, res, next);
+      this._controller.Update(req, res, next);
     });
   }
 
   public deleteRoutes(router: Router): void {
     // handle DELETE for ${this.route}/:componentId
     router.delete("/:id", (req: Request, res: Response, next: NextFunction) => {
-      this.controller.Delete(req, res, next);
+      this._controller.Delete(req, res, next);
     });
   }
 
