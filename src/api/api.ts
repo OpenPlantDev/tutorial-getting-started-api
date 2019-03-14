@@ -21,7 +21,7 @@ export class Api {
 
     // handle errors thrown during the handling of the request
     api.use((err: ApiError, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      const status = err.status ? err.status : 500;
+      const status = err instanceof ApiError ? err.status : 500;
       const message = err.message ? err.message : "Server error";
 
       res.status(status).json({message});
