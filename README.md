@@ -25,3 +25,9 @@ After cloning:
 ## Part 5 (Tag: Part5)
   * Adding Controllers
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part5 [yourFolder]
+## Part 6 (Tag: Part6)
+  * Adding Repositories
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part6 [yourFolder]
+## Part 7 (Tag: Part7)
+  * Adding DataStores and the Fake Db
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part7 [yourFolder]
