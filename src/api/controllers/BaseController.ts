@@ -1,33 +1,95 @@
 import {Request, Response, NextFunction} from "express";
 import {IApiController} from "./IApiController";
 import {ApiError} from "../ApiError";
+import { IApiRepository, IRepositoryItem } from "../repositories/IApiRepository";
 
 export abstract class BaseController implements IApiController {
 
   public resourceName: string = "";
+  private _repository: IApiRepository;
 
-  constructor(resourceName: string) {
+  constructor(resourceName: string, repository: IApiRepository) {
     this.resourceName = resourceName;
+    this._repository = repository;
   }
 
+  public abstract GetRepositoryItemFromBody(body: any): IRepositoryItem;
+
   public Get(req: Request, res: Response, next: NextFunction) {
-    next (new ApiError(501, `controller for GET /api/${this.resourceName} is not yet implmented`));
+
+    try {
+      const result = this._repository.Get();
+      if (result instanceof Error) {
+        next (new ApiError(400, result.message));
+      } else {
+        res.status(200).json(result);
+      }
+    } catch (err) {
+      next (new ApiError(500, err.message));
+    }
   }
 
   public GetById(req: Request, res: Response, next: NextFunction) {
-    next (new ApiError(501, `controller for GetById /api/${this.resourceName}/id is not yet implmented`));
+    try {
+      const id = req.params.id;
+      const result = this._repository.GetById(id);
+      if (result instanceof Error) {
+        next (new ApiError(400, result.message));
+      } else {
+        res.status(200).json(result);
+      }
+    } catch (err) {
+      next (new ApiError(500, err.message));
+    }
   }
 
   public Add(req: Request, res: Response, next: NextFunction) {
-    next (new ApiError(501, `controller for Add /api/${this.resourceName} is not yet implmented`));
+    try {
+      if (!req.body) {
+        next (new ApiError(400, `Request has no body`));
+      }
+      const item: IRepositoryItem = this.GetRepositoryItemFromBody(req.body);
+      item.id = "";
+      const result = this._repository.Add(item);
+      if (result instanceof Error) {
+        next (new ApiError(400, result.message));
+      } else {
+        res.status(201).json(result);
+      }
+    } catch (err) {
+      next (new ApiError(500, err.message));
+    }
   }
 
   public Update(req: Request, res: Response, next: NextFunction) {
-    next (new ApiError(501, `controller for Update /api/${this.resourceName}/id is not yet implmented`));
+    try {
+      if (!req.body) {
+        next (new ApiError(400, `Request has no body`));
+      }
+      const item: IRepositoryItem = this.GetRepositoryItemFromBody(req.body);
+      const result = this._repository.Update(item);
+      if (result instanceof Error) {
+        next (new ApiError(400, result.message));
+      } else {
+        res.status(201).json(result);
+      }
+    } catch (err) {
+      next (new ApiError(500, err.message));
+    }
   }
 
   public Delete(req: Request, res: Response, next: NextFunction) {
-    next (new ApiError(501, `controller for Delete /api/${this.resourceName}/id is not yet implmented`));
+    try {
+      const id = req.params.id;
+      const result = this._repository.Delete(id);
+      if (result instanceof Error) {
+        next (new ApiError(400, result.message));
+      } else {
+        res.status(200).json(result);
+      }
+    } catch (err) {
+      next (new ApiError(500, err.message));
+    }
   }
 
 }

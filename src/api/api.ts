@@ -7,6 +7,10 @@ export class Api {
   public Start(routers: IApiRouter[]): void {
     const api = express();
 
+    // add middleware to read body of request
+    api.use(express.json());
+    api.use(express.urlencoded({extended: true}));
+
     // handle routes defined by routers
     for (const router of routers) {
       api.use(router.route, router.routeHandler());
