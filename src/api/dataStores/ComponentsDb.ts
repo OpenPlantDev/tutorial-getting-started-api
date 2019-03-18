@@ -1,6 +1,7 @@
 import { IComponentsDataStore } from "./IComponentsDataStore";
 import { IComponent } from "../models/Component";
 import { SqliteConnection } from "../../services/sqliteConnection";
+import { IQueryOptions } from "../../services/queryOptions";
 
 const rowToComponent = (row: any): IComponent => {
   return {
@@ -33,8 +34,8 @@ export class ComponentsDb implements IComponentsDataStore {
     this._sqliteConnection = sqliteConnection;
   }
 
-  public async GetComponents(): Promise<IComponent[] | Error> {
-    const query = `Select * from ${this._tableName}`;
+  public async GetComponents(queryOptions?: IQueryOptions): Promise<IComponent[] | Error> {
+    const query = this._sqliteConnection.GetQueryString(this._tableName, queryOptions);
     console.log(`query = ${query}`);
     try {
       const result = await this._sqliteConnection.Query(query);

@@ -50,8 +50,8 @@ const routers: IApiRouter[] = [
 const api = new Api();
 api.Start(routers);
 
-let counter: number = 0;
-setInterval(() => {
-  const now = new Date();
-  console.log(`${counter++}: ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
-}, 1000);
+// let counter: number = 0;
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(`${counter++}: ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
+// }, 1000);

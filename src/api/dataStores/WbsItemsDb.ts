@@ -1,6 +1,7 @@
 import { IWbsItemsDataStore } from "./IWbsItemsDataStore";
 import { IWbsItem } from "../models/WbsItem";
 import { SqliteConnection } from "../../services/sqliteConnection";
+import { IQueryOptions } from "../../services/queryOptions";
 
 const rowToWbsItem = (row: any): IWbsItem => {
   return {
@@ -31,8 +32,8 @@ export class WbsItemsDb implements IWbsItemsDataStore {
     this._sqliteConnection = sqliteConnection;
   }
 
-  public async GetWbsItems(): Promise<IWbsItem[] | Error> {
-    const query = `Select * from ${this._tableName}`;
+  public async GetWbsItems(queryOptions?: IQueryOptions): Promise<IWbsItem[] | Error> {
+    const query = this._sqliteConnection.GetQueryString(this._tableName, queryOptions);
     console.log(`query = ${query}`);
     try {
       const result = await this._sqliteConnection.Query(query);

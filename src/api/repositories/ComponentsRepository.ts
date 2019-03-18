@@ -1,6 +1,7 @@
 import { IComponent } from "../models/Component";
 import { IComponentsRepository } from "./IComponentsRepository";
 import { IComponentsDataStore } from "../dataStores/IComponentsDataStore";
+import { IQueryOptions } from "../../services/queryOptions";
 
 export class ComponentsRepository implements IComponentsRepository {
 
@@ -10,8 +11,8 @@ export class ComponentsRepository implements IComponentsRepository {
     this._dataStore = dataStore;
   }
 
-  public async Get(): Promise<IComponent[] | Error> {
-    return this._dataStore.GetComponents();
+  public async Get(queryOptions?: IQueryOptions): Promise<IComponent[] | Error> {
+    return this._dataStore.GetComponents(queryOptions);
   }
 
   public async GetById(id: string): Promise<IComponent | Error> {

@@ -2,6 +2,7 @@ import {Request, Response, NextFunction} from "express";
 import {IApiController} from "./IApiController";
 import {ApiError} from "../ApiError";
 import { IApiRepository, IRepositoryItem } from "../repositories/IApiRepository";
+import {QueryOptions} from "../../services/queryOptions";
 
 export abstract class BaseController implements IApiController {
 
@@ -18,7 +19,9 @@ export abstract class BaseController implements IApiController {
   public async Get(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
 
     try {
-      const result = await this._repository.Get();
+      const queryOptions = QueryOptions.GetOptions(req.query);
+      console.log(queryOptions);
+      const result = await this._repository.Get(queryOptions);
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }

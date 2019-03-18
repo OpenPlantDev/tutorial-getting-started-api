@@ -1,8 +1,9 @@
 import { IComponent } from "../models/Component";
+import { IQueryOptions } from "../../services/queryOptions";
 
 export interface IComponentsDataStore {
 
-  GetComponents: () => Promise<IComponent[] | Error>;
+  GetComponents: (queryOptions?: IQueryOptions) => Promise<IComponent[] | Error>;
   GetComponentById: (id: string) => Promise<IComponent | Error>;
   AddComponent: (comp: IComponent) => Promise<string | Error>;
   UpdateComponent: (comp: IComponent) => Promise<IComponent | Error>;

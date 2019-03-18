@@ -1,6 +1,7 @@
 import { IWbsItem } from "../models/WbsItem";
 import { IWbsItemsRepository } from "./IWbsItemsRepository";
 import { IWbsItemsDataStore } from "../dataStores/IWbsItemsDataStore";
+import { IQueryOptions } from "../../services/queryOptions";
 
 export class WbsItemsRepository implements IWbsItemsRepository {
   private _dataStore: IWbsItemsDataStore;
@@ -9,8 +10,8 @@ export class WbsItemsRepository implements IWbsItemsRepository {
     this._dataStore = dataStore;
   }
 
-  public async Get(): Promise<IWbsItem[] | Error> {
-    return this._dataStore.GetWbsItems();
+  public async Get(queryOptions?: IQueryOptions): Promise<IWbsItem[] | Error> {
+    return this._dataStore.GetWbsItems(queryOptions);
   }
 
   public async GetById(id: string): Promise<IWbsItem | Error> {

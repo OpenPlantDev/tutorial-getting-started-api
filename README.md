@@ -35,5 +35,8 @@ After cloning:
   * Async
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part8 [yourFolder]
 ## Part 9 (Tag: Part9)
-  * Added Sqlite
+  * Adding Sqlite
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part9 [yourFolder]
+## Part 10 (Tag: Part10)
+  * Adding Query String Parameters
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part10 [yourFolder]
