@@ -7,7 +7,11 @@ import { WbsItemsController } from "./api/controllers/WbsItemsController";
 import { ComponentsRepository } from "./api/repositories/ComponentsRepository";
 import { WbsItemsRepository } from "./api/repositories/WbsItemsRepository";
 
+import { SqliteConnection } from "./services/sqliteConnection";
+import { ComponentsDb } from "./api/dataStores/ComponentsDb";
+
 import { FakeDb } from "./api/dataStores/FakeDb";
+import { WbsItemsDb } from "./api/dataStores/WbsItemsDb";
 
 const fakeDb = new FakeDb();
 fakeDb.SeedDb(
@@ -34,9 +38,13 @@ fakeDb.SeedDb(
 
 );
 
+const sqliteConnection = new SqliteConnection("model.db");
+const compDb = new ComponentsDb(sqliteConnection);
+const wbsItemsDb = new WbsItemsDb(sqliteConnection);
+
 const routers: IApiRouter[] = [
-  new ComponentsRouter(new ComponentsController(new ComponentsRepository(fakeDb))),
-  new WbsItemsRouter(new WbsItemsController(new WbsItemsRepository(fakeDb))),
+  new ComponentsRouter(new ComponentsController(new ComponentsRepository(compDb))),
+  new WbsItemsRouter(new WbsItemsController(new WbsItemsRepository(wbsItemsDb))),
 ];
 
 const api = new Api();
