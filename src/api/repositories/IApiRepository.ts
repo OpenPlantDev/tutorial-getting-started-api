@@ -4,10 +4,10 @@ import { IWbsItem } from "../models/WbsItem";
 export type IRepositoryItem = IComponent | IWbsItem;
 
 export interface IApiRepository {
-  Get: () => IRepositoryItem[] | Error;
-  GetById: (id: string) => IRepositoryItem | Error;
-  Add: (item: IRepositoryItem) => string | Error;
-  Update: (item: IRepositoryItem) => IRepositoryItem | Error;
-  Delete: (id: string) => boolean | Error;
+  Get: () => Promise<IRepositoryItem[] | Error>;
+  GetById: (id: string) => Promise<IRepositoryItem | Error>;
+  Add: (item: IRepositoryItem) => Promise<string | Error>;
+  Update: (item: IRepositoryItem) => Promise<IRepositoryItem | Error>;
+  Delete: (id: string) => Promise<boolean | Error>;
 
 }

@@ -31,3 +31,6 @@ After cloning:
 ## Part 7 (Tag: Part7)
   * Adding DataStores and the Fake Db
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part7 [yourFolder]
+## Part 8 (Tag: Part8)
+  * Async
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part8 [yourFolder]

@@ -4,6 +4,8 @@ import { IComponent } from "../models/Component";
 import { IWbsItem } from "../models/WbsItem";
 import {Guid} from "guid-typescript";
 
+const delay = async (ms: number = 1000) => new Promise((res) => setTimeout(res, ms));
+
 export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
 
   private _components: IComponent[] = [];
@@ -14,91 +16,121 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
     this._wbsItems = wbsItems;
   }
 
-  public GetComponents(): IComponent[] {
-    return this._components;
+  public async GetComponents(): Promise<IComponent[]> {
+    await delay();
+    return new Promise((resolve, reject) => {
+        resolve(this._components);
+      });
   }
 
-  public GetComponentById(id: string) {
-    const comp = this._components.find((c) => c.id === id);
-    if (comp) {
-      return comp;
-    }
-    return new Error(`Component with id: ${id} was not found`);
+  public async GetComponentById(id: string): Promise<IComponent | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      const comp = this._components.find((c) => c.id === id);
+      if (comp) {
+        return resolve(comp);
+      }
+      return resolve(new Error(`Component with id: ${id} was not found`));
+    });
   }
 
-  public AddComponent(comp: IComponent) {
-    // force new id
-    comp.id = Guid.create().toString();
-    this._components.push(comp);
-    return comp.id;
-  }
-
-  public UpdateComponent(comp: IComponent) {
-    const index = this._components.findIndex((c) => c.id === comp.id);
-    if (index >= 0) {
-      this._components.splice(index, 1);
+  public async AddComponent(comp: IComponent): Promise<string | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+        // force new id
+      comp.id = Guid.create().toString();
       this._components.push(comp);
-      return comp;
-    }
-    return new Error(`Component with id: ${comp.id} was not found`);
+      return resolve(comp.id);
+  });
+}
+
+  public async UpdateComponent(comp: IComponent): Promise<IComponent | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      const index = this._components.findIndex((c) => c.id === comp.id);
+      if (index >= 0) {
+        this._components.splice(index, 1);
+        this._components.push(comp);
+        return resolve(comp);
+      }
+      return resolve(new Error(`Component with id: ${comp.id} was not found`));
+    });
   }
 
-  public DeleteComponent(id: string) {
-    const index = this._components.findIndex((c) => c.id === id);
-    if (index >= 0) {
-      this._components.splice(index, 1);
-      return true;
-    }
-    return new Error(`Component with id: ${id} was not found`);
+  public async DeleteComponent(id: string): Promise<boolean | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      const index = this._components.findIndex((c) => c.id === id);
+      if (index >= 0) {
+        this._components.splice(index, 1);
+        return resolve(true);
+      }
+      return resolve(new Error(`Component with id: ${id} was not found`));
+    });
   }
 
   // WbsItems
 
-  public GetWbsItems(): IWbsItem[] {
-    return this._wbsItems;
+  public async GetWbsItems(): Promise<IWbsItem[] | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      resolve(this._wbsItems);
+    });
   }
 
-  public GetWbsItemById(id: string) {
-    const comp = this._wbsItems.find((c) => c.id === id);
-    if (comp) {
-      return comp;
-    }
-    return new Error(`WbsItem with id: ${id} was not found`);
+  public async GetWbsItemById(id: string): Promise<IWbsItem | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      const item = this._wbsItems.find((c) => c.id === id);
+      if (item) {
+        return resolve(item);
+      }
+      return resolve(new Error(`WbsItem with id: ${id} was not found`));
+    });
+
   }
 
-  public AddWbsItem(item: IWbsItem) {
-
-    // validate data
-    const className: string = (item.className ? item.className : "").trim();
-    if (!className) {
-      return new Error(`className not specified`);
-    }
-    const tag: string = (item.tag ? item.tag : "").trim();
-    if (!tag) {
-      return new Error(`tag not specified`);
-    }
-    // force new id
-    item.id = Guid.create().toString();
-    this._wbsItems.push(item);
-    return item.id;
-  }
-
-  public UpdateWbsItem(item: IWbsItem) {
-    const index = this._wbsItems.findIndex((c) => c.id === item.id);
-    if (index >= 0) {
-      this._wbsItems.splice(index, 1);
+  public async AddWbsItem(item: IWbsItem): Promise<string | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      const className: string = (item.className ? item.className : "").trim();
+      if (!className) {
+        return resolve(new Error(`className not specified`));
+      }
+      const tag: string = (item.tag ? item.tag : "").trim();
+      if (!tag) {
+        return resolve(new Error(`tag not specified`));
+      }
+      // force new id
+      item.id = Guid.create().toString();
       this._wbsItems.push(item);
-      return item;
-    }
-    return new Error(`WbsItem with id: ${item.id} was not found`);
+      return resolve(item.id);
+      });
   }
 
-  public DeleteWbsItem(id: string) {
-    const index = this._wbsItems.findIndex((c) => c.id === id);
-    if (index >= 0) {
-      this._wbsItems.splice(index, 1);
-      return true;
-    }
-    return new Error(`WbsItem with id: ${id} was not found`);
+  public async UpdateWbsItem(item: IWbsItem): Promise<IWbsItem | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+
+      const index = this._wbsItems.findIndex((c) => c.id === item.id);
+      if (index >= 0) {
+        this._wbsItems.splice(index, 1);
+        this._wbsItems.push(item);
+        return resolve(item);
+      }
+      return resolve(new Error(`WbsItem with id: ${item.id} was not found`));
+    });
+  }
+
+  public async DeleteWbsItem(id: string): Promise<boolean | Error> {
+    await delay();
+    return new Promise((resolve, reject) => {
+      const index = this._wbsItems.findIndex((c) => c.id === id);
+      if (index >= 0) {
+        this._wbsItems.splice(index, 1);
+        return resolve(true);
+      }
+      return resolve(new Error(`WbsItem with id: ${id} was not found`));
+    });
   }
 }

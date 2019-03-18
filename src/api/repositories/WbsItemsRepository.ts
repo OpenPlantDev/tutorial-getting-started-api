@@ -9,26 +9,26 @@ export class WbsItemsRepository implements IWbsItemsRepository {
     this._dataStore = dataStore;
   }
 
-  public Get(): IWbsItem[] | Error {
+  public async Get(): Promise<IWbsItem[] | Error> {
     return this._dataStore.GetWbsItems();
   }
 
-  public GetById(id: string): IWbsItem | Error {
+  public async GetById(id: string): Promise<IWbsItem | Error> {
     return this._dataStore.GetWbsItemById(id);
   }
 
-  public Add(item: IWbsItem): string | Error {
+  public async Add(item: IWbsItem): Promise<string | Error> {
     item.id = "";
 
     return this._dataStore.AddWbsItem(item);
   }
 
-  public Update(item: IWbsItem): IWbsItem | Error {
+  public async Update(item: IWbsItem): Promise<IWbsItem | Error> {
 
     return this._dataStore.UpdateWbsItem(item);
   }
 
-  public Delete(id: string): boolean | Error {
+  public async Delete(id: string): Promise<boolean | Error> {
     return this._dataStore.DeleteWbsItem(id);
   }
 

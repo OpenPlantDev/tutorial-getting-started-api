@@ -10,23 +10,23 @@ export class ComponentsRepository implements IComponentsRepository {
     this._dataStore = dataStore;
   }
 
-  public Get(): IComponent[] | Error {
+  public async Get(): Promise<IComponent[] | Error> {
     return this._dataStore.GetComponents();
   }
 
-  public GetById(id: string): IComponent | Error {
+  public async GetById(id: string): Promise<IComponent | Error> {
     return this._dataStore.GetComponentById(id);
   }
 
-  public Add(comp: IComponent): string | Error {
+  public async Add(comp: IComponent): Promise<string | Error> {
     return this._dataStore.AddComponent(comp);
   }
 
-  public Update(comp: IComponent): IComponent | Error {
+  public async Update(comp: IComponent): Promise<IComponent | Error> {
     return this._dataStore.UpdateComponent(comp);
   }
 
-  public Delete(id: string): boolean | Error {
+  public async Delete(id: string): Promise<boolean | Error> {
     return this._dataStore.DeleteComponent(id);
   }
 
