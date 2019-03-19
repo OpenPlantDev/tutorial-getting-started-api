@@ -3,15 +3,18 @@ import {IApiController} from "./IApiController";
 import {ApiError} from "../ApiError";
 import { IApiRepository, IRepositoryItem } from "../repositories/IApiRepository";
 import {QueryOptions} from "../../services/queryOptions";
+import { SocketService } from "../../services/socketService";
 
 export abstract class BaseController implements IApiController {
 
   public resourceName: string = "";
   private _repository: IApiRepository;
+  private _socketService: SocketService;
 
-  constructor(resourceName: string, repository: IApiRepository) {
+  constructor(resourceName: string, repository: IApiRepository, socketService: SocketService) {
     this.resourceName = resourceName;
     this._repository = repository;
+    this._socketService = socketService;
   }
 
   public abstract GetRepositoryItemFromBody(body: any): IRepositoryItem;
@@ -54,6 +57,7 @@ export abstract class BaseController implements IApiController {
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }
+      this._socketService.emitMessage("DbUpdated", `Component ${result} was added`);
       return res.status(201).json(result);
     } catch (err) {
       return next (new ApiError(500, err.message));
@@ -71,6 +75,7 @@ export abstract class BaseController implements IApiController {
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }
+      this._socketService.emitMessage("DbUpdated", `Component ${result.id} was updated`);
       return res.status(201).json(result);
     } catch (err) {
       return next (new ApiError(500, err.message));
@@ -84,6 +89,7 @@ export abstract class BaseController implements IApiController {
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }
+      this._socketService.emitMessage("DbUpdated", `Component ${id} was deleted`);
       return res.status(200).json(result);
     } catch (err) {
       return next (new ApiError(500, err.message));

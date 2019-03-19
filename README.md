@@ -46,3 +46,6 @@ After cloning:
 ## Part 12 (Tag: Part12)
   * Unit Testing Controllers with Jest
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part12 [yourFolder]
+## Part 13 (Tag: Part13)
+  * Adding Socket.io
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part13 [yourFolder]

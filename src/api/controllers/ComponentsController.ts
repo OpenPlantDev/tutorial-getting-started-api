@@ -1,11 +1,12 @@
 import {BaseController} from "./BaseController";
 import { IComponentsRepository } from "../repositories/IComponentsRepository";
 import { IComponent } from "../models/Component";
+import { SocketService } from "../../services/socketService";
 
 export class ComponentsController extends BaseController {
 
-  constructor(repository: IComponentsRepository) {
-    super("components", repository);
+  constructor(repository: IComponentsRepository, socketService: SocketService) {
+    super("components", repository, socketService);
   }
 
   public GetRepositoryItemFromBody(body: any): IComponent {

@@ -1,11 +1,20 @@
 import express from "express";
+import * as http from "http";
 import {ApiError} from "./ApiError";
 import {IApiRouter} from "./routers/IApiRouter";
 
 export class Api {
 
+  private _api: express.Application;
+  public httpServer: http.Server;
+
+  constructor() {
+    this._api = express();
+    this.httpServer = new http.Server(this._api);
+  }
+
   public Start(routers: IApiRouter[]): void {
-    const api = express();
+    const api = this._api;
 
     // add middleware to read body of request
     api.use(express.json());
@@ -46,7 +55,7 @@ export class Api {
     // Start the server
     const port = process.env.PORT || 3000;
 
-    api.listen(port, () => {
+    this.httpServer.listen(port, () => {
       console.log(`Api is listening on http://localhost:${port}`);
     });
   }

@@ -13,6 +13,8 @@ import { ComponentsDb } from "./api/dataStores/ComponentsDb";
 import { FakeDb } from "./api/dataStores/FakeDb";
 import { WbsItemsDb } from "./api/dataStores/WbsItemsDb";
 
+import {SocketService} from "./services/socketService";
+
 const fakeDb = new FakeDb();
 fakeDb.SeedDb(
   [
@@ -38,16 +40,18 @@ fakeDb.SeedDb(
 
 );
 
+const api = new Api();
+const socketService = new SocketService(api.httpServer);
+
 const sqliteConnection = new SqliteConnection("model.db");
 const compDb = new ComponentsDb(sqliteConnection);
 const wbsItemsDb = new WbsItemsDb(sqliteConnection);
 
 const routers: IApiRouter[] = [
-  new ComponentsRouter(new ComponentsController(new ComponentsRepository(compDb))),
-  new WbsItemsRouter(new WbsItemsController(new WbsItemsRepository(wbsItemsDb))),
+  new ComponentsRouter(new ComponentsController(new ComponentsRepository(compDb), socketService)),
+  new WbsItemsRouter(new WbsItemsController(new WbsItemsRepository(wbsItemsDb), socketService)),
 ];
 
-const api = new Api();
 api.Start(routers);
 
 // let counter: number = 0;
