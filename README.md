@@ -49,3 +49,6 @@ After cloning:
 ## Part 13 (Tag: Part13)
   * Adding Socket.io
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part13 [yourFolder]
+## Part 14 (Tag: Part14)
+  * Adding Authentication using jwt's
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part14 [yourFolder]
