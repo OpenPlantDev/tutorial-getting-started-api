@@ -62,7 +62,7 @@
     ".git",
     "node_modules",
     "**/*.spec.ts",
-    "test",
+    "__test__",
     "out"
   ]
 }

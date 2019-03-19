@@ -20,7 +20,6 @@ export abstract class BaseController implements IApiController {
 
     try {
       const queryOptions = QueryOptions.GetOptions(req.query);
-      console.log(queryOptions);
       const result = await this._repository.Get(queryOptions);
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
@@ -36,7 +35,7 @@ export abstract class BaseController implements IApiController {
       const id = req.params.id;
       const result = await this._repository.GetById(id);
       if (result instanceof Error) {
-        return next (new ApiError(400, result.message));
+        return next (new ApiError(404, result.message));
       }
       return res.status(200).json(result);
     } catch (err) {

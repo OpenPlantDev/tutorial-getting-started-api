@@ -43,3 +43,6 @@ After cloning:
 ## Part 11 (Tag: Part11)
   * Allowing CORS
     * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part11 [yourFolder]
+## Part 12 (Tag: Part12)
+  * Unit Testing Controllers with Jest
+    * git clone https://github.com/OpenPlantDev/tutorial-getting-started-api.git -b Part12 [yourFolder]
