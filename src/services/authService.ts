@@ -30,7 +30,7 @@ export const createToken = (userName: string, password: string): string | ApiErr
   if (result instanceof ApiError) {
     return result;
   }
-  return jwt.sign({sub: userName}, getSecret(), {issuer: "bentley", expiresIn: "1d"});  // for seconds pass number not string
+  return jwt.sign({subject: userName}, getSecret(), {issuer: "bentley", expiresIn: "1d"});  // for seconds pass number not string
 };
 
 export const validateToken = (authHeader: string): boolean | ApiError => {
