@@ -32,11 +32,11 @@ export class WbsItemsDb implements IWbsItemsDataStore {
     this._sqliteConnection = sqliteConnection;
   }
 
-  public async GetWbsItems(queryOptions?: IQueryOptions): Promise<IWbsItem[] | Error> {
-    const query = this._sqliteConnection.GetQueryString(this._tableName, queryOptions);
+  public async getWbsItems(queryOptions?: IQueryOptions): Promise<IWbsItem[] | Error> {
+    const query = this._sqliteConnection.getQueryString(this._tableName, queryOptions);
     console.log(`query = ${query}`);
     try {
-      const result = await this._sqliteConnection.Query(query);
+      const result = await this._sqliteConnection.query(query);
       if (result instanceof Error) {
         return result;
       }
@@ -46,10 +46,10 @@ export class WbsItemsDb implements IWbsItemsDataStore {
     }
   }
 
-  public async GetWbsItemById(id: string): Promise<IWbsItem | Error> {
+  public async getWbsItemById(id: string): Promise<IWbsItem | Error> {
     const query = `Select * from ${this._tableName} where id=${id}`;
     try {
-      const result = await this._sqliteConnection.Query(query);
+      const result = await this._sqliteConnection.query(query);
       if (result instanceof Error) {
         return result;
       }
@@ -62,14 +62,14 @@ export class WbsItemsDb implements IWbsItemsDataStore {
     }
   }
 
-  public async AddWbsItem(item: IWbsItem): Promise<string | Error> {
+  public async addWbsItem(item: IWbsItem): Promise<string | Error> {
     const className = item.className;
     const tag = item.tag;
     const description = item.description;
     const query = `Insert into ${this._tableName} (className, tag, description) Values
                     ('${className}', '${tag}', '${description}')`;
     try {
-      const result = await this._sqliteConnection.Execute(query);
+      const result = await this._sqliteConnection.execute(query);
       if (result instanceof Error) {
         return result;
       }
@@ -79,7 +79,7 @@ export class WbsItemsDb implements IWbsItemsDataStore {
     }
 }
 
-  public async UpdateWbsItem(item: IWbsItem): Promise<IWbsItem | Error> {
+  public async updateWbsItem(item: IWbsItem): Promise<IWbsItem | Error> {
     const className = item.className;
     const tag = item.tag;
     const description = item.description;
@@ -89,7 +89,7 @@ export class WbsItemsDb implements IWbsItemsDataStore {
                        description='${description}'
                     Where id=${item.id}`;
     try {
-      const result = await this._sqliteConnection.Execute(query);
+      const result = await this._sqliteConnection.execute(query);
       if (result instanceof Error) {
         return result;
       }
@@ -102,10 +102,10 @@ export class WbsItemsDb implements IWbsItemsDataStore {
     }
   }
 
-  public async DeleteWbsItem(id: string): Promise<boolean | Error> {
+  public async deleteWbsItem(id: string): Promise<boolean | Error> {
     const query = `Delete from ${this._tableName} where id=${id}`;
     try {
-      const result = await this._sqliteConnection.Execute(query);
+      const result = await this._sqliteConnection.execute(query);
       if (result instanceof Error) {
         return result;
       }

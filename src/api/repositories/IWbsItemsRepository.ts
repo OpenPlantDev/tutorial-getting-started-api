@@ -2,9 +2,9 @@ import {IWbsItem} from "../models/WbsItem";
 import { IQueryOptions } from "../../services/queryOptions";
 
 export interface IWbsItemsRepository {
-  Get: (queryOptions?: IQueryOptions) => Promise<IWbsItem[] | Error>;
-  GetById: (id: string) => Promise<IWbsItem | Error>;
-  Add: (item: IWbsItem) => Promise<string | Error>;
-  Update: (item: IWbsItem) => Promise<IWbsItem | Error>;
-  Delete: (id: string) => Promise<boolean | Error>;
+  get: (queryOptions?: IQueryOptions) => Promise<IWbsItem[] | Error>;
+  getById: (id: string) => Promise<IWbsItem | Error>;
+  add: (item: IWbsItem) => Promise<string | Error>;
+  update: (item: IWbsItem) => Promise<IWbsItem | Error>;
+  delete: (id: string) => Promise<boolean | Error>;
 }

@@ -16,7 +16,7 @@ import { WbsItemsDb } from "./api/dataStores/WbsItemsDb";
 import {SocketService} from "./services/socketService";
 
 const fakeDb = new FakeDb();
-fakeDb.SeedDb(
+fakeDb.seedDb(
   [
     {id: "1", className: "valve", tag: "FV-100", description: "Gate Valve",  manufacturer: "ABC",
       properties: {length: 25, weight: 50},
@@ -52,7 +52,7 @@ const routers: IApiRouter[] = [
   new WbsItemsRouter(new WbsItemsController(new WbsItemsRepository(wbsItemsDb), socketService)),
 ];
 
-api.Start(routers);
+api.start(routers);
 
 // let counter: number = 0;
 // setInterval(() => {

@@ -10,27 +10,27 @@ export class WbsItemsRepository implements IWbsItemsRepository {
     this._dataStore = dataStore;
   }
 
-  public async Get(queryOptions?: IQueryOptions): Promise<IWbsItem[] | Error> {
-    return this._dataStore.GetWbsItems(queryOptions);
+  public async get(queryOptions?: IQueryOptions): Promise<IWbsItem[] | Error> {
+    return this._dataStore.getWbsItems(queryOptions);
   }
 
-  public async GetById(id: string): Promise<IWbsItem | Error> {
-    return this._dataStore.GetWbsItemById(id);
+  public async getById(id: string): Promise<IWbsItem | Error> {
+    return this._dataStore.getWbsItemById(id);
   }
 
-  public async Add(item: IWbsItem): Promise<string | Error> {
+  public async add(item: IWbsItem): Promise<string | Error> {
     item.id = "";
 
-    return this._dataStore.AddWbsItem(item);
+    return this._dataStore.addWbsItem(item);
   }
 
-  public async Update(item: IWbsItem): Promise<IWbsItem | Error> {
+  public async update(item: IWbsItem): Promise<IWbsItem | Error> {
 
-    return this._dataStore.UpdateWbsItem(item);
+    return this._dataStore.updateWbsItem(item);
   }
 
-  public async Delete(id: string): Promise<boolean | Error> {
-    return this._dataStore.DeleteWbsItem(id);
+  public async delete(id: string): Promise<boolean | Error> {
+    return this._dataStore.deleteWbsItem(id);
   }
 
 }

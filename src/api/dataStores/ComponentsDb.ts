@@ -34,11 +34,11 @@ export class ComponentsDb implements IComponentsDataStore {
     this._sqliteConnection = sqliteConnection;
   }
 
-  public async GetComponents(queryOptions?: IQueryOptions): Promise<IComponent[] | Error> {
-    const query = this._sqliteConnection.GetQueryString(this._tableName, queryOptions);
+  public async getComponents(queryOptions?: IQueryOptions): Promise<IComponent[] | Error> {
+    const query = this._sqliteConnection.getQueryString(this._tableName, queryOptions);
     console.log(`query = ${query}`);
     try {
-      const result = await this._sqliteConnection.Query(query);
+      const result = await this._sqliteConnection.query(query);
       if (result instanceof Error) {
         return result;
       }
@@ -48,10 +48,10 @@ export class ComponentsDb implements IComponentsDataStore {
     }
   }
 
-  public async GetComponentById(id: string): Promise<IComponent | Error> {
+  public async getComponentById(id: string): Promise<IComponent | Error> {
     const query = `Select * from ${this._tableName} where id=${id}`;
     try {
-      const result = await this._sqliteConnection.Query(query);
+      const result = await this._sqliteConnection.query(query);
       if (result instanceof Error) {
         return result;
       }
@@ -64,7 +64,7 @@ export class ComponentsDb implements IComponentsDataStore {
     }
   }
 
-  public async AddComponent(comp: IComponent): Promise<string | Error> {
+  public async addComponent(comp: IComponent): Promise<string | Error> {
     const className = comp.className;
     const tag = comp.tag;
     const description = comp.description;
@@ -73,7 +73,7 @@ export class ComponentsDb implements IComponentsDataStore {
     const query = `Insert into ${this._tableName} (className, tag, description, manufacturer, properties) Values
                     ('${className}', '${tag}', '${description}', '${manufacturer}', '${properties}')`;
     try {
-      const result = await this._sqliteConnection.Execute(query);
+      const result = await this._sqliteConnection.execute(query);
       if (result instanceof Error) {
         return result;
       }
@@ -83,7 +83,7 @@ export class ComponentsDb implements IComponentsDataStore {
     }
 }
 
-  public async UpdateComponent(comp: IComponent): Promise<IComponent | Error> {
+  public async updateComponent(comp: IComponent): Promise<IComponent | Error> {
     const className = comp.className;
     const tag = comp.tag;
     const description = comp.description;
@@ -97,7 +97,7 @@ export class ComponentsDb implements IComponentsDataStore {
                        properties='${properties}'
                     Where id=${comp.id}`;
     try {
-      const result = await this._sqliteConnection.Execute(query);
+      const result = await this._sqliteConnection.execute(query);
       if (result instanceof Error) {
         return result;
       }
@@ -110,10 +110,10 @@ export class ComponentsDb implements IComponentsDataStore {
     }
   }
 
-  public async DeleteComponent(id: string): Promise<boolean | Error> {
+  public async deleteComponent(id: string): Promise<boolean | Error> {
     const query = `Delete from ${this._tableName} where id=${id}`;
     try {
-      const result = await this._sqliteConnection.Execute(query);
+      const result = await this._sqliteConnection.execute(query);
       if (result instanceof Error) {
         return result;
       }

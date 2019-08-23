@@ -11,19 +11,19 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
   private _components: IComponent[] = [];
   private _wbsItems: IWbsItem[] = [];
 
-  public SeedDb(components: IComponent[], wbsItems: IWbsItem[]) {
+  public seedDb(components: IComponent[], wbsItems: IWbsItem[]) {
     this._components = components;
     this._wbsItems = wbsItems;
   }
 
-  public async GetComponents(): Promise<IComponent[]> {
+  public async getComponents(): Promise<IComponent[]> {
     await delay();
     return new Promise((resolve, reject) => {
         resolve(this._components);
       });
   }
 
-  public async GetComponentById(id: string): Promise<IComponent | Error> {
+  public async getComponentById(id: string): Promise<IComponent | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       const comp = this._components.find((c) => c.id === id);
@@ -34,7 +34,7 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
     });
   }
 
-  public async AddComponent(comp: IComponent): Promise<string | Error> {
+  public async addComponent(comp: IComponent): Promise<string | Error> {
     await delay();
     return new Promise((resolve, reject) => {
         // force new id
@@ -44,7 +44,7 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
   });
 }
 
-  public async UpdateComponent(comp: IComponent): Promise<IComponent | Error> {
+  public async updateComponent(comp: IComponent): Promise<IComponent | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       const index = this._components.findIndex((c) => c.id === comp.id);
@@ -57,7 +57,7 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
     });
   }
 
-  public async DeleteComponent(id: string): Promise<boolean | Error> {
+  public async deleteComponent(id: string): Promise<boolean | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       const index = this._components.findIndex((c) => c.id === id);
@@ -71,14 +71,14 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
 
   // WbsItems
 
-  public async GetWbsItems(): Promise<IWbsItem[] | Error> {
+  public async getWbsItems(): Promise<IWbsItem[] | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       resolve(this._wbsItems);
     });
   }
 
-  public async GetWbsItemById(id: string): Promise<IWbsItem | Error> {
+  public async getWbsItemById(id: string): Promise<IWbsItem | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       const item = this._wbsItems.find((c) => c.id === id);
@@ -90,7 +90,7 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
 
   }
 
-  public async AddWbsItem(item: IWbsItem): Promise<string | Error> {
+  public async addWbsItem(item: IWbsItem): Promise<string | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       const className: string = (item.className ? item.className : "").trim();
@@ -108,7 +108,7 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
       });
   }
 
-  public async UpdateWbsItem(item: IWbsItem): Promise<IWbsItem | Error> {
+  public async updateWbsItem(item: IWbsItem): Promise<IWbsItem | Error> {
     await delay();
     return new Promise((resolve, reject) => {
 
@@ -122,7 +122,7 @@ export class FakeDb implements IComponentsDataStore, IWbsItemsDataStore {
     });
   }
 
-  public async DeleteWbsItem(id: string): Promise<boolean | Error> {
+  public async deleteWbsItem(id: string): Promise<boolean | Error> {
     await delay();
     return new Promise((resolve, reject) => {
       const index = this._wbsItems.findIndex((c) => c.id === id);

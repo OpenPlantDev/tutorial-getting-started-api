@@ -27,33 +27,33 @@ export abstract class BaseRouter implements IApiRouter {
   public getRoutes(router: Router): void {
     // handle GET for ${this.route}
     router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-      await this._controller.Get(req, res, next);
+      await this._controller.get(req, res, next);
     });
 
     // handle GET for ${this.route}/:componentId
     router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
-      await this._controller.GetById(req, res, next);
+      await this._controller.getById(req, res, next);
     });
   }
 
   public postRoutes(router: Router): void {
     // handle POST for ${this.route}
     router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-      await this._controller.Add(req, res, next);
+      await this._controller.add(req, res, next);
     });
   }
 
   public putRoutes(router: Router): void {
     // handle PUT for /api/components/:componentId
     router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
-      await this._controller.Update(req, res, next);
+      await this._controller.update(req, res, next);
     });
   }
 
   public deleteRoutes(router: Router): void {
     // handle DELETE for ${this.route}/:componentId
     router.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
-      await this._controller.Delete(req, res, next);
+      await this._controller.delete(req, res, next);
     });
   }
 

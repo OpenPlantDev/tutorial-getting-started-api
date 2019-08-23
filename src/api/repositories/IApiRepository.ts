@@ -5,10 +5,10 @@ import { IQueryOptions } from "../../services/queryOptions";
 export type IRepositoryItem = IComponent | IWbsItem;
 
 export interface IApiRepository {
-  Get: (queryOptions?: IQueryOptions) => Promise<IRepositoryItem[] | Error>;
-  GetById: (id: string) => Promise<IRepositoryItem | Error>;
-  Add: (item: IRepositoryItem) => Promise<string | Error>;
-  Update: (item: IRepositoryItem) => Promise<IRepositoryItem | Error>;
-  Delete: (id: string) => Promise<boolean | Error>;
+  get: (queryOptions?: IQueryOptions) => Promise<IRepositoryItem[] | Error>;
+  getById: (id: string) => Promise<IRepositoryItem | Error>;
+  add: (item: IRepositoryItem) => Promise<string | Error>;
+  update: (item: IRepositoryItem) => Promise<IRepositoryItem | Error>;
+  delete: (id: string) => Promise<boolean | Error>;
 
 }

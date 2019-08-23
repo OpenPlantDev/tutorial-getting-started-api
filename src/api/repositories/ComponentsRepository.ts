@@ -11,24 +11,24 @@ export class ComponentsRepository implements IComponentsRepository {
     this._dataStore = dataStore;
   }
 
-  public async Get(queryOptions?: IQueryOptions): Promise<IComponent[] | Error> {
-    return this._dataStore.GetComponents(queryOptions);
+  public async get(queryOptions?: IQueryOptions): Promise<IComponent[] | Error> {
+    return this._dataStore.getComponents(queryOptions);
   }
 
-  public async GetById(id: string): Promise<IComponent | Error> {
-    return this._dataStore.GetComponentById(id);
+  public async getById(id: string): Promise<IComponent | Error> {
+    return this._dataStore.getComponentById(id);
   }
 
-  public async Add(comp: IComponent): Promise<string | Error> {
-    return this._dataStore.AddComponent(comp);
+  public async add(comp: IComponent): Promise<string | Error> {
+    return this._dataStore.addComponent(comp);
   }
 
-  public async Update(comp: IComponent): Promise<IComponent | Error> {
-    return this._dataStore.UpdateComponent(comp);
+  public async update(comp: IComponent): Promise<IComponent | Error> {
+    return this._dataStore.updateComponent(comp);
   }
 
-  public async Delete(id: string): Promise<boolean | Error> {
-    return this._dataStore.DeleteComponent(id);
+  public async delete(id: string): Promise<boolean | Error> {
+    return this._dataStore.deleteComponent(id);
   }
 
 }

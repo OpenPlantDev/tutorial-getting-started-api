@@ -15,7 +15,7 @@ export class Api {
     this.httpServer = new http.Server(this._api);
   }
 
-  public Start(routers: IApiRouter[]): void {
+  public start(routers: IApiRouter[]): void {
     const api = this._api;
 
     // add middleware to read body of request

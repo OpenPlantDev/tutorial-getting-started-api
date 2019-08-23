@@ -17,13 +17,13 @@ export abstract class BaseController implements IApiController {
     this._socketService = socketService;
   }
 
-  public abstract GetRepositoryItemFromBody(body: any): IRepositoryItem;
+  public abstract getRepositoryItemFromBody(body: any): IRepositoryItem;
 
-  public async Get(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  public async get(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
 
     try {
-      const queryOptions = QueryOptions.GetOptions(req.query);
-      const result = await this._repository.Get(queryOptions);
+      const queryOptions = QueryOptions.getOptions(req.query);
+      const result = await this._repository.get(queryOptions);
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }
@@ -33,10 +33,10 @@ export abstract class BaseController implements IApiController {
     }
   }
 
-  public async GetById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  public async getById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       const id = req.params.id;
-      const result = await this._repository.GetById(id);
+      const result = await this._repository.getById(id);
       if (result instanceof Error) {
         return next (new ApiError(404, result.message));
       }
@@ -46,14 +46,14 @@ export abstract class BaseController implements IApiController {
     }
   }
 
-  public async Add(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  public async add(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       if (!req.body) {
         return next (new ApiError(400, `Request has no body`));
       }
-      const item: IRepositoryItem = this.GetRepositoryItemFromBody(req.body);
+      const item: IRepositoryItem = this.getRepositoryItemFromBody(req.body);
       item.id = "";
-      const result = await this._repository.Add(item);
+      const result = await this._repository.add(item);
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }
@@ -64,14 +64,14 @@ export abstract class BaseController implements IApiController {
     }
   }
 
-  public async Update(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  public async update(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       if (!req.body) {
         return next (new ApiError(400, `Request has no body`));
       }
-      const item: IRepositoryItem = this.GetRepositoryItemFromBody(req.body);
+      const item: IRepositoryItem = this.getRepositoryItemFromBody(req.body);
       item.id = req.params.id;
-      const result = await this._repository.Update(item);
+      const result = await this._repository.update(item);
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }
@@ -82,10 +82,10 @@ export abstract class BaseController implements IApiController {
     }
   }
 
-  public async Delete(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  public async delete(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       const id = req.params.id;
-      const result = await this._repository.Delete(id);
+      const result = await this._repository.delete(id);
       if (result instanceof Error) {
         return next (new ApiError(400, result.message));
       }

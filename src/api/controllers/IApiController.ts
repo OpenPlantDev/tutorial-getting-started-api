@@ -1,9 +1,9 @@
 import {Request, Response, NextFunction} from "express";
 
 export interface IApiController {
-  Get: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
-  GetById: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
-  Add: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
-  Update: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
-  Delete: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
+  get: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
+  getById: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
+  add: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
+  update: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
+  delete: (req: Request, res: Response, next: NextFunction) => Promise<Response | void>;
 }

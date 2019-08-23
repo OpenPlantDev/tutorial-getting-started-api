@@ -6,7 +6,6 @@
     ]
   },
   "rules": {
-    "no-console": false,
-    "naming-convention": false
+    "no-console": false
   }
 }

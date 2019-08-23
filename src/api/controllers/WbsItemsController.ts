@@ -9,7 +9,7 @@ export class WbsItemsController extends BaseController {
     super("wbsitems", repository, socketService);
   }
 
-  public GetRepositoryItemFromBody(body: any): IWbsItem {
+  public getRepositoryItemFromBody(body: any): IWbsItem {
     const item: IWbsItem = {
       id: body.id,
       className: body.className,

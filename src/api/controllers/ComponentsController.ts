@@ -9,7 +9,7 @@ export class ComponentsController extends BaseController {
     super("components", repository, socketService);
   }
 
-  public GetRepositoryItemFromBody(body: any): IComponent {
+  public getRepositoryItemFromBody(body: any): IComponent {
     const comp: IComponent = {
       id: body.id,
       className: body.className,
