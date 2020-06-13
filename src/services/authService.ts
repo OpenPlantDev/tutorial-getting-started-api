@@ -38,7 +38,7 @@ export const validateToken = (authHeader: string): boolean | ApiError => {
     return new ApiError(401, "No token");
   }
   if (!authHeader.startsWith("Bearer ")) {
-    return new ApiError(401, "Invalid token");
+    return new ApiError(401, "Invalid token - not a Bearer token");
   }
 
   const token = authHeader.substring(7);
@@ -47,7 +47,7 @@ export const validateToken = (authHeader: string): boolean | ApiError => {
     const options: jwt.VerifyOptions = {ignoreExpiration: false, issuer: "bentley"};
     const payload = jwt.verify(token, getSecret(), options);
     if (!payload || !isAuthPayload(payload)) {
-      return new ApiError(401, "Invalid token");
+      return new ApiError(401, "Invalid token - invalid payload");
     }
 
     console.log(`userName: ${payload.sub}`);
