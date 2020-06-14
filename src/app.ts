@@ -15,6 +15,8 @@ import { WbsItemsDb } from "./api/dataStores/WbsItemsDb";
 
 import {SocketService} from "./services/socketService";
 
+import * as dotenv from "dotenv";
+
 const fakeDb = new FakeDb();
 fakeDb.seedDb(
   [
@@ -39,6 +41,10 @@ fakeDb.seedDb(
   ],
 
 );
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 const api = new Api();
 const socketService = new SocketService(api.httpServer);
