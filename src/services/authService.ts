@@ -2,13 +2,13 @@ import {ApiError} from "../api/ApiError";
 import jwt from "jsonwebtoken";
 
 export interface IAuthPayload {
-  sub: string;
+  subject: string;
 }
 
 function isAuthPayload(obj: any): obj is IAuthPayload {
   const payload = obj as IAuthPayload;
 
-  return (payload && (payload.sub !== undefined));
+  return (payload && (payload.subject !== undefined));
 }
 
 const getSecret = (): string => {
@@ -30,6 +30,7 @@ export const createToken = (userName: string, password: string): string | ApiErr
   if (result instanceof ApiError) {
     return result;
   }
+  console.log(`secret = ${getSecret()}`);
   return jwt.sign({subject: userName}, getSecret(), {issuer: "bentley", expiresIn: "1d"});  // for seconds pass number not string
 };
 
@@ -42,15 +43,17 @@ export const validateToken = (authHeader: string): boolean | ApiError => {
   }
 
   const token = authHeader.substring(7);
-  // console.log(`token:${token}`);
+  console.log(`token:${token}`);
+  console.log(`secret = ${getSecret()}`);
   try {
     const options: jwt.VerifyOptions = {ignoreExpiration: false, issuer: "bentley"};
     const payload = jwt.verify(token, getSecret(), options);
+    console.log(payload);
     if (!payload || !isAuthPayload(payload)) {
       return new ApiError(401, "Invalid token - invalid payload");
     }
 
-    console.log(`userName: ${payload.sub}`);
+    console.log(`userName: ${payload.subject}`);
     return true;
   } catch (err) {
     return new ApiError(401, err.message);

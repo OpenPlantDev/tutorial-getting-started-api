@@ -3,7 +3,7 @@ import * as http from "http";
 import {ApiError} from "./ApiError";
 import {IApiRouter} from "./routers/IApiRouter";
 import { LoginRouter } from "./routers/LoginRouter";
-// import * as AuthService from "../services/authService";
+import * as AuthService from "../services/authService";
 
 export class Api {
 
@@ -39,14 +39,14 @@ export class Api {
 
     // Authentication
     // Commented out for now
-    // api.use("/api", (req, res, next) => {
-    //   const authHeader = req.get("Authorization") as string;
-    //   const authResult = AuthService.validateToken(authHeader);
-    //   if (authResult instanceof ApiError) {
-    //     return next(authResult);
-    //   }
-    //   return next();
-    // });
+    api.use("/api", (req, res, next) => {
+      const authHeader = req.get("Authorization") as string;
+      const authResult = AuthService.validateToken(authHeader);
+      if (authResult instanceof ApiError) {
+        return next(authResult);
+      }
+      return next();
+    });
 
     // handle routes defined by routers
     for (const router of routers) {
