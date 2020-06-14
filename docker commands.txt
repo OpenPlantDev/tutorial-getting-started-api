@@ -1,0 +1,18 @@
+# build image setting tag = latest and also setting SECRET
+docker build --build-arg CMDLINE_SECRET=api-tutorial-secret -t dannicholsben/tutorial-getting-started-api:latest .
+
+# run the local image
+docker run --name Tutorial-Api-Dev --rm -d -p 3030:3000/tcp dannicholsben/tutorial-getting-started-api:latest
+
+# create tag and push to DockerHub
+docker tag  dannicholsben/tutorial-getting-started-api:latest  dannicholsben/opdev:tutorial-getting-started-api.1.0
+docker push dannicholsben/opdev:tutorial-getting-started-api.1.0
+
+# pull from DockerHub
+docker pull dannicholsben/opdev:tutorial-getting-started-api.1.0
+
+# run image downloaded from DockerHub
+docker run --name Tutorial-Api --rm -d -p 3030:3000/tcp dannicholsben/opdev:tutorial-getting-started-api.1.0
+
+#list docker images
+docker images
